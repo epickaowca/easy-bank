@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Nav from '../components/structures/Nav'
 import styled from 'styled-components'
 import logo from '../asset/logo.svg'
-import { useWindowSize } from '../helpers/hooks'
 import Button from '../components/elements/Button'
 
 const HeaderElem = styled.header`
@@ -23,20 +22,35 @@ const HeaderElem = styled.header`
             border: none;
             background: inherit;
             outline: none;
+            &:nth-child(3){
+                display: none;
+            }
+        }
+    }
+    ${p=>p.theme.media.desktop1}{
+        & > div{
+            & > button{
+                &:nth-child(3){
+                    display: block;
+                }
+                &:nth-child(4){
+                    display: none;
+                }
+            }
         }
     }
 `
 
 const Header = ()=>{
     const [navEject, setNavEject] = useState(false)
-    const size = useWindowSize();
 
     return(
         <HeaderElem>
             <div>
                 <div> <img alt="logo" src={logo} /> </div>
                 <Nav setNavEject={setNavEject} navEject={navEject} />
-                {size.width >= 800 ? <Button /> : <button onClick={()=>setNavEject(prev=>!prev)}> <img alt="navButton" src={require(`../asset/${navEject ? 'icon-close' : 'icon-hamburger'}.svg`)} /> </button> }
+                <Button />
+                <button onClick={()=>setNavEject(prev=>!prev)}> <img alt="navButton" src={require(`../asset/${navEject ? 'icon-close' : 'icon-hamburger'}.svg`)} /></button>
             </div>
         </HeaderElem>
     )

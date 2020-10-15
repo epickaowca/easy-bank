@@ -33,8 +33,7 @@ const ArticleWrapper = styled.div`
     }
 `
 
-const Article = (props)=>{
-    console.log(props);
+const Article = props=>{
     return(
         <ArticleWrapper img={require(`../../asset/image-${props.item.img}.jpg`)}>
             <div></div>

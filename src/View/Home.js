@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useWindowSize } from '../helpers/hooks'
 import mockupsImg from '../asset/image-mockups.png'
 import Button from '../components/elements/Button'
+import mobileIntro from '../asset/bg-intro-mobile.svg'
+import desktopIntro from '../asset/bg-intro-desktop.svg'
 
 const HomeWrapper = styled.div`
     background: #FAFAFA;
@@ -14,19 +15,22 @@ const HomeWrapper = styled.div`
         & > div {
             &:nth-child(1){
                 position: relative;
-                max-width: 550px;
+                & > div {
+                    width: 100%;
+                    position: absolute;
+                    right: 0;
+                    background-image: url(${props=>props.bgMobile});
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: cover;
+                    height: 100%;
+                }
                 & > img{
-                    &:nth-child(1){
-                        width: 100%;
-                        position: absolute;
-                        right: 0;
-                    }
-                    &:nth-child(2){
+                        min-width: 500px;
                         transform: translateY(-200px);
                         z-index: 1;
                         position: relative;
                         max-width: 100%;
-                    }
                 }
             }
         
@@ -56,17 +60,15 @@ const HomeWrapper = styled.div`
             max-width: unset !important;
             &:nth-child(1){
                 text-align: right;
+                & > div {
+                    background-image: url(${props=>props.bgDesktop});
+                    width: 700px;
+                    transform: translate(150px, -150px);
+                }
                 & > img{
-                    &:nth-child(1){
-                        width: 700px;
-                        transform: translate(150px, -150px);
-                    }
-                    &:nth-child(2){
-                        width: 450px !important;
-                        max-width: unset;
-                        transform: translateY(-50px);
-
-                    }
+                    width: 450px !important;
+                    max-width: unset;
+                    transform: translateY(-50px);
                 }
             }
             &:nth-child(2){
@@ -86,15 +88,13 @@ const HomeWrapper = styled.div`
         & > div {
             &:nth-child(1){
                 max-width: 550px !important;
+                & > div {
+                    width: 180%;
+                    transform: translate(250px, -150px);
+                }
                 & > img{
-                    &:nth-child(1){
-                        width: 180%;
-                        transform: translate(250px, -150px);
-                    }
-                    &:nth-child(2){
                         width: 100% !important;
                         transform: translateY(-50px);
-                    }
                 }
             }
             &:nth-child(2){
@@ -115,11 +115,6 @@ const HomeWrapper = styled.div`
             &:nth-child(1){
                 width: 550px;
                 height: 677px;
-                & > img{
-                    &:nth-child(2){
-                        
-                    }
-                }
             }
             &:nth-child(2){
                 & > h1{
@@ -140,11 +135,9 @@ const HomeWrapper = styled.div`
                 width: 550px;
                 height: 677px;
                 & > img{
-                    &:nth-child(2){
-                        left: 0;
-                        position: absolute;
-                        width: 700px !important;
-                    }
+                    left: 0;
+                    position: absolute;
+                    width: 700px !important;
                 }
             }
         }
@@ -152,12 +145,11 @@ const HomeWrapper = styled.div`
 `
 
 const Home = ()=>{
-    const size = useWindowSize();
-    const img = require(`../asset/bg-intro-${size.width >= 800 ? 'desktop' : 'mobile'}.svg`)
+    console.log(mobileIntro)
     return(
-        <HomeWrapper img={img}>
+        <HomeWrapper bgMobile={mobileIntro} bgDesktop={desktopIntro}>
                 <div>
-                    <img alt="background" src={img}></img>
+                    <div></div>
                     <img alt="mocksUp" src={mockupsImg}></img>
                 </div>
                 <div>
